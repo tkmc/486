@@ -1,0 +1,86 @@
+##
+##    makefile.vc1
+##    Copyright (C) Teruhisa Kamachi and ASCII Corp. 1994
+##    All rights reserved.
+##
+##    このファイルは『はじめて読む486』（アスキー出版局）に掲載した
+##    プログラムの一部です。プログラム内容や利用方法については本文の
+##    記述を参照してください。
+## 
+
+CC	= cl
+LD	= $(CC) /Fm -o $@
+LDFLAGS	= -link /NOE
+ASM	= masm
+AFLAGS	= /zi /mx
+CFLAGS  = -D__MSC__ -Gd -Fc -Gs
+#CFLAGS	= -DDEBUG -D__MSC__ -Gd -Fc -Gs
+#CFLAGS	= -DPC98 -D__MSC__ -Gd -Fc -Gs
+
+.asm.obj:
+	$(ASM) $(AFLAGS) $<
+.c.obj:
+	$(CC) $(CFLAGS) -c $<
+
+all:	testprot rmseg pmseg putpmem getpmem hardint fault dpmiinfo revfile testgate testtask
+
+
+chkstk.obj: chkstk.asm
+	$(ASM) $(AFLAGS) /IE:\msvc\source\startup /Dmem_s chkstk.asm;
+
+
+testprot:	testprot.exe
+
+testprot.exe:	testprot.obj proto0_a.obj
+	$(LD) $** $(LDFLAGS)
+
+rmseg:		rmseg.exe
+
+rmseg.exe:	rmseg.obj
+	$(LD) $** $(LDFLAGS)
+
+pmseg:		pmseg.exe
+
+pmseg.exe:	pmseg.obj printseg.obj proto_a.obj seg.obj segtolin.obj
+	$(LD) $** $(LDFLAGS)
+
+putpmem:	putpmem.exe
+
+putpmem.exe:	putpmem.obj a20.obj pmem.obj proto_a.obj seg.obj segtolin.obj trans_a.obj
+	$(LD) $** $(LDFLAGS)
+
+getpmem:	getpmem.exe
+
+getpmem.exe:	getpmem.obj a20.obj pmem.obj proto_a.obj seg.obj segtolin.obj trans_a.obj
+	$(LD) $** $(LDFLAGS)
+
+hardint:	hardint.exe
+
+hardint.exe:	hardint.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj intfunc.obj proto_a.obj seg.obj segtolin.obj
+	$(LD) $** $(LDFLAGS)
+
+fault:	fault.exe
+
+fault.exe:	fault.obj disp.obj disp_a.obj gate.obj gpe_a.obj int.obj int_a.obj intfunc.obj proto_a.obj seg.obj segtolin.obj
+	$(LD) $** $(LDFLAGS)
+
+dpmiinfo:	dpmiinfo.exe
+
+dpmiinfo.exe:	dpmiinfo.obj dpmi.obj dpmi_a.obj
+	$(LD) $** $(LDFLAGS)
+
+revfile:	revfile.exe
+
+revfile.exe:	revfile.obj a20.obj disp.obj disp_a.obj file.obj gate.obj int.obj int_a.obj intfunc.obj page.obj page_a.obj proto_a.obj rev_a.obj seg.obj segtolin.obj trans_a.obj vm.obj
+	$(LD) $** $(LDFLAGS)
+
+testgate:	testgate.exe
+
+testgate.exe:	testgate.obj seg.obj  segtolin.obj proto_a.obj gate.obj disp.obj disp_a.obj int.obj int_a.obj task.obj task_a.obj intfunc.obj chkstk.obj
+	$(LD) $** $(LDFLAGS)
+
+testtask:	testtask.exe
+
+testtask.exe:	testtask.obj seg.obj segtolin.obj proto_a.obj gate.obj int.obj int_a.obj intfunc.obj task.obj task_a.obj disp.obj disp_a.obj chkstk.obj
+	$(LD) $** $(LDFLAGS)
+

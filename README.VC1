@@ -1,0 +1,34 @@
+
+　VC++ 1.0およびMASM 6.0で本プログラムのmakeを行う場合はsieve32、vsieve、dpmisievを作成することができません。これは、1つのセグメント中に16ビットセグメントと32ビットセグメントを混在させることができないというリンカの制限があるためです。また、testgate、testtaskについては、sprintfやspawnのライブラリサイズが大きすぎるため、そのままでは実行することができません。これを実行させるためにはVC++のsource\startupからchkstk.asmをコピーして修正し、makefileでそのchkstk.objをリンクするようにしなければいけません。具体的には、次に示すようにjcとjbの2行をコメントにし、リンクのオプションに“-link /NOE”を追加します。本プログラムに添付してあるmakefile.vc1は、この指定を含んだものです。なおこれは、例題プログラムを動かすためだけのイリーガル（illegal）な処置であることをご了解ください。
+
+
+---［chkstk.asmの修正部分］--------------------------------------------------
+	sub	bx,ax		; bx = new position
+;	jc	OMerr		; error - out of memory ←この行をコメント化
+
+	cmp	bx,[_STKHQQ]	; SP - AX : _STKHQQ (for heap/stack)
+;	jb	OMerr		; error - out of memory ←この行をコメント化
+-----------------------------------------------------------------------------
+
+
+---［makefile.vc1の一部］----------------------------------------------------
+CC	= cl
+LD	= $(CC) /Fm -o $@
+LDFLAGS	= -link /NOE ← オプション指定を加えた部分
+ASM	= masm
+AFLAGS	= /zi /mx
+CFLAGS  = -D__MSC__ -Gd -Fc -Gs
+        :
+chkstk.obj: chkstk.asm
+    $(ASM) $(AFLAGS) /I\msvc\source\startup /Dmem_s chkstk.asm;
+                       ^^^^^^^^^^^^^^^^^^^^ chkstk.asmのあるディレクトリを指定
+        :
+testgate.exe:	testgate.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj intfunc.obj proto.obj seg.obj segtolin.obj task.obj task_a.obj chkstk.obj
+	$(LD) $** $(LDFLAGS)                               ^^^^^^^^^^
+        :
+-----------------------------------------------------------------------------
+
+
+                                                             株式会社アスキー
+
+

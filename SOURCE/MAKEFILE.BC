@@ -1,0 +1,114 @@
+##
+##    makefile.bc
+##    Copyright (C) Teruhisa Kamachi and ASCII Corp. 1994
+##    All rights reserved.
+##
+##    このファイルは『はじめて読む486』（アスキー出版局）に掲載した
+##    プログラムの一部です。プログラム内容や利用方法については本文の
+##    記述を参照してください。
+## 
+
+CC	= bcc
+ASM	= tasm
+AFLAGS	= /zi /mx /jnosmart
+CFLAGS	= -c
+#CFLAGS	= -c -DDEBUG
+#CFLAGS	= -c -DPC98
+
+.asm.obj:
+	$(ASM) $(AFLAGS) $<
+.c.obj:
+	$(CC) $(CFLAGS) $<
+
+all:	testprot rmseg pmseg putpmem getpmem sieve32 testgate hardint fault testtask vsieve intmon dpmiinfo dpmisiev revfile iomon
+
+
+
+testprot:	testprot.exe
+
+testprot.exe:	testprot.obj proto0_a.obj
+	$(CC) $**
+
+rmseg:		rmseg.exe
+
+rmseg.exe:	rmseg.obj
+	$(CC) $**
+
+pmseg:		pmseg.exe
+
+pmseg.exe:	pmseg.obj printseg.obj proto_a.obj seg.obj segtolin.obj
+	$(CC) $**
+
+putpmem:	putpmem.exe
+
+putpmem.exe:	putpmem.obj a20.obj pmem.obj proto_a.obj seg.obj segtolin.obj trans_a.obj
+	$(CC) $**
+
+getpmem:	getpmem.exe
+
+getpmem.exe:	getpmem.obj a20.obj pmem.obj proto_a.obj seg.obj segtolin.obj trans_a.obj
+	$(CC) $**
+
+sieve32:	sieve32.exe
+
+sieve32.exe:	sieve32.obj a20.obj proto_a.obj seg.obj segtolin.obj sieve_a.obj
+	$(CC) $**
+
+testgate:	testgate.exe
+
+testgate.exe:	testgate.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj intfunc.obj proto_a.obj seg.obj  segtolin.obj task.obj task_a.obj
+	$(CC) $**
+
+hardint:	hardint.exe
+
+hardint.exe:	hardint.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj intfunc.obj proto_a.obj seg.obj segtolin.obj
+	$(CC) $**
+
+fault:	fault.exe
+
+fault.exe:	fault.obj disp.obj disp_a.obj gate.obj gpe_a.obj int.obj int_a.obj intfunc.obj proto_a.obj seg.obj segtolin.obj
+	$(CC) $**
+
+testtask:	testtask.exe
+
+testtask.exe:	testtask.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj intfunc.obj proto_a.obj seg.obj segtolin.obj task.obj task_a.obj
+	$(CC) $**
+
+vsieve:		vsieve.exe
+
+vsieve.exe:	vsieve.obj a20.obj disp.obj disp_a.obj file.obj gate.obj int.obj int_a.obj intfunc.obj page.obj page_a.obj proto_a.obj seg.obj segtolin.obj sieve_a.obj trans_a.obj vm.obj
+	$(CC) @&&!
+$**
+!
+
+intmon:		intmon.exe
+
+intmon.exe:	intmon.obj a20.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj intfunc.obj pmem.obj proto_a.obj seg.obj segtolin.obj task.obj task_a.obj trans_a.obj v86.obj v86_a.obj
+	$(CC) @&&!
+$**
+!
+
+dpmiinfo:	dpmiinfo.exe
+
+dpmiinfo.exe:	dpmiinfo.obj dpmi.obj dpmi_a.obj
+	$(CC) $**
+
+dpmisiev:	dpmisiev.exe
+
+dpmisiev.exe:	dpmisiev.obj dpmi.obj dpmi_a.obj sieve_a.obj segtolin.obj
+	$(CC) $**
+
+revfile:	revfile.exe
+
+revfile.exe:	revfile.obj a20.obj disp.obj disp_a.obj file.obj gate.obj int.obj int_a.obj intfunc.obj page.obj page_a.obj proto_a.obj rev_a.obj seg.obj segtolin.obj trans_a.obj vm.obj
+	$(CC) @&&!
+$**
+!
+
+iomon:	iomon.exe
+
+iomon.exe:	iomon.obj a20.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj intfunc.obj ioaudit.obj ioemu_a.obj pmem.obj proto_a.obj seg.obj segtolin.obj task.obj task_a.obj trans_a.obj v86.obj v86_a.obj
+	$(CC) @&&!
+$**
+!
+
