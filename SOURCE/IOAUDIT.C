@@ -16,6 +16,9 @@
 #include <dos.h>
 #include <stdio.h>
 #include <string.h>
+#ifdef __WATCOMC__
+#include <conio.h>
+#endif
 #include "proto.h"
 #include "int.h"
 #include "task.h"

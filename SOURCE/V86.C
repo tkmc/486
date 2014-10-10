@@ -20,6 +20,9 @@
 #else  /* BC */
 #include <alloc.h>
 #endif
+#ifdef __WATCOMC__
+#include <stdlib.h>
+#endif
 #include <memory.h>
 #include "proto.h"
 #include "int.h"
