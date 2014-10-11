@@ -23,7 +23,7 @@
 
 void __far sieve(unsigned short sel, unsigned long num);
 int __far isprime(unsigned short sel, unsigned long num);
-extern unsigned short __far csseg32;
+extern unsigned short csseg32;
 
 void main(int argc, char *argv[])
 {
