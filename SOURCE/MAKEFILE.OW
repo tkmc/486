@@ -1,20 +1,29 @@
-# FIXME: can't link some targets on FreeDOS: too many arguments.
+# Chapter 1
 TARGET	+= sieve_c.exe
+# Chapter 4
 TARGET	+= testprot.exe
+# Chapter 5
 TARGET	+= rmseg.exe
 TARGET	+= pmseg.exe 
 TARGET	+= putpmem.exe
 TARGET	+= getpmem.exe
 TARGET	+= sieve32.exe
+# Chapter 6
+TARGET	+= testgate.exe
+# Chapter 7
 TARGET	+= hardint.exe
 TARGET	+= fault.exe
+# Chapter 8
+TARGET	+= testtask.exe
+# Chapter 9
+TARGET	+= vsieve.exe
+# Chapter 11
+TARGET	+= intmon.exe
+# Chapter 12
 TARGET	+= dpmiinfo.exe
 TARGET	+= dpmisiev.exe
+# Chapter 13
 TARGET	+= revfile.exe
-TARGET	+= testgate.exe
-TARGET	+= testtask.exe
-TARGET	+= vsieve.exe
-TARGET	+= intmon.exe
 TARGET	+= iomon.exe
 
 CC	= wcc
@@ -60,6 +69,11 @@ sieve32.exe:	sieve32.obj a20.obj proto_a.obj seg.obj segtolin.obj &
 		sieve_a.obj
 	$(LD) $(LDFLAGS) $<
 
+testgate.exe:	testgate.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj &
+		intfunc.obj proto_a.obj seg.obj  segtolin.obj task.obj &
+		task_a.obj testgate.lnk
+	wlink @testgate.lnk
+
 hardint.exe:	hardint.obj disp.obj disp_a.obj gate.obj gpe_a.obj int.obj &
 		int_a.obj intfunc.obj proto_a.obj seg.obj segtolin.obj
 	$(LD) $(LDFLAGS) $<
@@ -67,6 +81,22 @@ hardint.exe:	hardint.obj disp.obj disp_a.obj gate.obj gpe_a.obj int.obj &
 fault.exe:	fault.obj disp.obj disp_a.obj gate.obj gpe_a.obj int.obj &
 		int_a.obj intfunc.obj proto_a.obj seg.obj segtolin.obj
 	$(LD) $(LDFLAGS) $<
+
+testtask.exe:	testtask.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj &
+		intfunc.obj proto_a.obj seg.obj segtolin.obj task.obj &
+		task_a.obj testtask.lnk
+	wlink @testtask.lnk
+
+vsieve.exe:	vsieve.obj a20.obj disp.obj disp_a.obj file.obj gate.obj &
+		int.obj int_a.obj intfunc.obj page.obj page_a.obj proto_a.obj &
+		seg.obj segtolin.obj sieve_a.obj trans_a.obj vm.obj vsieve.lnk
+	wlink @vsieve.lnk
+
+intmon.exe:	intmon.obj a20.obj disp.obj disp_a.obj gate.obj int.obj &
+		int_a.obj intfunc.obj pmem.obj proto_a.obj seg.obj &
+		segtolin.obj task.obj task_a.obj trans_a.obj v86.obj &
+		v86_a.obj intmon.lnk
+	wlink @intmon.lnk
 
 dpmiinfo.exe:	dpmiinfo.obj dpmi.obj dpmi_a.obj
 	$(LD) $(LDFLAGS) $<
@@ -76,31 +106,12 @@ dpmisiev.exe:	dpmisiev.obj dpmi.obj dpmi_a.obj sieve_a.obj segtolin.obj
 
 revfile.exe:	revfile.obj a20.obj disp.obj disp_a.obj file.obj gate.obj &
 		int.obj int_a.obj intfunc.obj page.obj page_a.obj &
-		proto_a.obj rev_a.obj seg.obj segtolin.obj trans_a.obj vm.obj
-	$(LD) $(LDFLAGS) $<
-
-testgate.exe:	testgate.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj &
-		intfunc.obj proto_a.obj seg.obj  segtolin.obj task.obj &
-		task_a.obj
-	$(LD) $(LDFLAGS) $<
-
-testtask.exe:	testtask.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj &
-		intfunc.obj proto_a.obj seg.obj segtolin.obj task.obj &
-		task_a.obj
-	$(LD) $(LDFLAGS) $<
-
-vsieve.exe:	vsieve.obj a20.obj disp.obj disp_a.obj file.obj gate.obj &
-		int.obj int_a.obj intfunc.obj page.obj page_a.obj proto_a.obj &
-		seg.obj segtolin.obj sieve_a.obj trans_a.obj vm.obj
-	$(LD) $(LDFLAGS) $<
-
-intmon.exe:	intmon.obj a20.obj disp.obj disp_a.obj gate.obj int.obj &
-		int_a.obj intfunc.obj pmem.obj proto_a.obj seg.obj &
-		segtolin.obj task.obj task_a.obj trans_a.obj v86.obj v86_a.obj
-	$(LD) $(LDFLAGS) $<
+		proto_a.obj rev_a.obj seg.obj segtolin.obj trans_a.obj vm.obj &
+		revfile.lnk
+	wlink @revfile.lnk
 
 iomon.exe:	iomon.obj a20.obj disp.obj disp_a.obj gate.obj int.obj &
 		int_a.obj intfunc.obj ioaudit.obj ioemu_a.obj pmem.obj &
 		proto_a.obj seg.obj segtolin.obj task.obj task_a.obj &
-		trans_a.obj v86.obj v86_a.obj
-	$(LD) $(LDFLAGS) $<
+		trans_a.obj v86.obj v86_a.obj iomon.lnk
+	wlink @iomon.lnk

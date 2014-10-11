@@ -1,0 +1,4 @@
+system	dos
+name	testtask
+file	testtask.obj, disp.obj, disp_a.obj, gate.obj, int.obj, int_a.obj,
+	intfunc.obj, proto_a.obj, seg.obj, segtolin.obj, task.obj, task_a.obj
