@@ -93,7 +93,7 @@ void SetUpGDT(void)
     unsigned short codesize,datasize,stacksize;
 
     segread(&seg);
-    codesize=(seg.ds-seg.cs)*16;
+    codesize=(seg.ds-seg.cs)*16-1;
     datasize=0xffff;
     stacksize=0; /*(unsigned short) sbrk(0);*/
 
@@ -119,4 +119,3 @@ void SetUpGDT(void)
 
     lgdt(&gdtptr);
 }
-
