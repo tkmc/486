@@ -21,6 +21,8 @@
 
 #define NUM 100000
 
+extern unsigned short csseg32;
+
 void main(int argc, char *argv[])
 {
     unsigned long i,m,snum;
@@ -44,7 +46,7 @@ void main(int argc, char *argv[])
 
     csel = DPMIAllocLDT();
     DPMISetRights(csel, TypeCode+0x60, Code386);
-    DPMISetBaseAddr(csel, SegToLinier(seg.cs, 0));
+    DPMISetBaseAddr(csel, SegToLinier(csseg32, 0));
     DPMISetLimit(csel, codesize);
     sieveFunc = (void (__far *)() )
         (((unsigned long)csel<<16) + (unsigned short) sieve);

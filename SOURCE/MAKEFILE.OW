@@ -1,0 +1,117 @@
+# Chapter 1
+TARGET	+= sieve_c.exe
+# Chapter 4
+TARGET	+= testprot.exe
+# Chapter 5
+TARGET	+= rmseg.exe
+TARGET	+= pmseg.exe 
+TARGET	+= putpmem.exe
+TARGET	+= getpmem.exe
+TARGET	+= sieve32.exe
+# Chapter 6
+TARGET	+= testgate.exe
+# Chapter 7
+TARGET	+= hardint.exe
+TARGET	+= fault.exe
+# Chapter 8
+TARGET	+= testtask.exe
+# Chapter 9
+TARGET	+= vsieve.exe
+# Chapter 11
+TARGET	+= intmon.exe
+# Chapter 12
+TARGET	+= dpmiinfo.exe
+TARGET	+= dpmisiev.exe
+# Chapter 13
+TARGET	+= revfile.exe
+TARGET	+= iomon.exe
+
+CC	= wcc
+CFLAGS	= -q -ecc -od -D__MSC__
+ASM	= wasm
+AFLAGS	= -q
+LD	= wcl
+LDFLAGS	= -q
+
+.c.obj:
+	$(CC) $(CFLAGS) $<
+.asm.obj:
+	$(ASM) $(AFLAGS) $<
+
+all:	$(TARGET)
+
+clean:	.SYMBOLIC
+	-DEL *.OBJ
+	-DEL *.ERR
+	-DEL *.EXE
+
+sieve_c.exe:	sieve_c.obj
+	$(LD) $(LDFLAGS) $<
+
+testprot.exe:	testprot.obj proto0_a.obj
+	$(LD) $(LDFLAGS) $<
+
+rmseg.exe:	rmseg.obj
+	$(LD) $(LDFLAGS) $<
+
+pmseg.exe:	pmseg.obj printseg.obj proto_a.obj seg.obj segtolin.obj
+	$(LD) $(LDFLAGS) $<
+
+putpmem.exe:	putpmem.obj a20.obj pmem.obj proto_a.obj seg.obj &
+		segtolin.obj trans_a.obj
+	$(LD) $(LDFLAGS) $<
+
+getpmem.exe:	getpmem.obj a20.obj pmem.obj proto_a.obj seg.obj &
+		segtolin.obj trans_a.obj
+	$(LD) $(LDFLAGS) $<
+
+sieve32.exe:	sieve32.obj a20.obj proto_a.obj seg.obj segtolin.obj &
+		sieve_a.obj
+	$(LD) $(LDFLAGS) $<
+
+testgate.exe:	testgate.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj &
+		intfunc.obj proto_a.obj seg.obj  segtolin.obj task.obj &
+		task_a.obj testgate.lnk
+	wlink @testgate.lnk
+
+hardint.exe:	hardint.obj disp.obj disp_a.obj gate.obj gpe_a.obj int.obj &
+		int_a.obj intfunc.obj proto_a.obj seg.obj segtolin.obj
+	$(LD) $(LDFLAGS) $<
+
+fault.exe:	fault.obj disp.obj disp_a.obj gate.obj gpe_a.obj int.obj &
+		int_a.obj intfunc.obj proto_a.obj seg.obj segtolin.obj
+	$(LD) $(LDFLAGS) $<
+
+testtask.exe:	testtask.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj &
+		intfunc.obj proto_a.obj seg.obj segtolin.obj task.obj &
+		task_a.obj testtask.lnk
+	wlink @testtask.lnk
+
+vsieve.exe:	vsieve.obj a20.obj disp.obj disp_a.obj file.obj gate.obj &
+		int.obj int_a.obj intfunc.obj page.obj page_a.obj proto_a.obj &
+		seg.obj segtolin.obj sieve_a.obj trans_a.obj vm.obj vsieve.lnk
+	wlink @vsieve.lnk
+
+intmon.exe:	intmon.obj a20.obj disp.obj disp_a.obj gate.obj int.obj &
+		int_a.obj intfunc.obj pmem.obj proto_a.obj seg.obj &
+		segtolin.obj task.obj task_a.obj trans_a.obj v86.obj &
+		v86_a.obj intmon.lnk
+	wlink @intmon.lnk
+
+dpmiinfo.exe:	dpmiinfo.obj dpmi.obj dpmi_a.obj
+	$(LD) $(LDFLAGS) $<
+
+dpmisiev.exe:	dpmisiev.obj dpmi.obj dpmi_a.obj sieve_a.obj segtolin.obj
+	$(LD) $(LDFLAGS) $<
+
+revfile.exe:	revfile.obj a20.obj disp.obj disp_a.obj file.obj gate.obj &
+		int.obj int_a.obj intfunc.obj page.obj page_a.obj &
+		proto_a.obj rev_a.obj seg.obj segtolin.obj trans_a.obj vm.obj &
+		revfile.lnk
+	wlink @revfile.lnk
+
+iomon.exe:	iomon.obj a20.obj disp.obj disp_a.obj gate.obj int.obj &
+		int_a.obj intfunc.obj ioaudit.obj ioemu_a.obj pmem.obj &
+		proto_a.obj seg.obj segtolin.obj task.obj task_a.obj &
+		trans_a.obj v86.obj v86_a.obj iomon.lnk
+	wlink @iomon.lnk
