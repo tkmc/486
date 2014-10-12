@@ -1,0 +1,5 @@
+system	dos
+name	intmon
+file	intmon.obj, a20.obj, disp.obj, disp_a.obj, gate.obj, int.obj,
+	int_a.obj, intfunc.obj, pmem.obj, proto_a.obj, seg.obj, segtolin.obj,
+	task.obj, task_a.obj, trans_a.obj, v86.obj, v86_a.obj
