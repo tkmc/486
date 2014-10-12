@@ -15,8 +15,11 @@
 
 .386
 
-_TEXT   segment byte public use32 'CODE'
-        assume  cs:_TEXT
+DGROUP  group   _DATA
+
+_TEXT32 segment byte public use32 'CODE'
+        assume  cs:_TEXT32
+
 
 ;;************************************************************
 ;; void sieve(unsigned short tblsel, unsigned long num)
@@ -81,6 +84,14 @@ _isprime        proc    far
                 ret
 _isprime        endp
 
-_TEXT           ends
+_TEXT32         ends
+
+
+_DATA   segment word public use16 'DATA'
+
+public  _csseg32
+_csseg32        dw      _TEXT32
+
+_DATA           ends
+
                 end
-

@@ -45,7 +45,7 @@ void DispInt(int n, unsigned short cs, unsigned short ip)
         m=0;
 }
 
-int keyInt;
+volatile int keyInt;
 
 void CheckInt(int n, unsigned short cs, unsigned short ip)
 {
@@ -69,4 +69,3 @@ void TestHardInt(void)
         }
     }
 }
-

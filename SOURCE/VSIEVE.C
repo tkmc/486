@@ -30,6 +30,7 @@
 
 void VMMapFile(char *);
 void VMClose(void);
+extern unsigned short csseg32;
 
 void main(int argc, char *argv[])
 {
@@ -55,7 +56,7 @@ void main(int argc, char *argv[])
     EnableA20();
 
     sel = AllocSel();
-    SetSegDesc(sel, SegToLinier(seg.cs, 0),
+    SetSegDesc(sel, SegToLinier(csseg32, 0),
                                 0xffff, TypeCode, Code386, 0);
     sieveFunc = (void (__far *)() )
         (((unsigned long)sel<<16) + (unsigned short) sieve);
