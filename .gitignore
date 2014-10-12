@@ -1,0 +1,9 @@
+.*
+*~
+*.bak
+*.err
+*.exe
+*.map
+*.obj
+
+!.gitignore
