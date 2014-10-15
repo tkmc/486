@@ -1,5 +1,0 @@
-system	dos
-name	vsieve
-file	vsieve.obj, a20.obj, disp.obj, disp_a.obj, file.obj, gate.obj, int.obj,
-	int_a.obj, intfunc.obj, page.obj, page_a.obj, proto_a.obj, seg.obj,
-	segtolin.obj, sieve_a.obj, trans_a.obj, vm.obj
