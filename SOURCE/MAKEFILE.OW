@@ -27,7 +27,7 @@ TARGET	+= revfile.exe
 TARGET	+= iomon.exe
 
 CC	= wcc
-CFLAGS	= -q -ecc -od -D__MSC__
+CFLAGS	= -q -ecc -D__MSC__
 ASM	= wasm
 AFLAGS	= -q
 LD	= wcl
