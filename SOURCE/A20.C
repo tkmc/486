@@ -21,6 +21,10 @@ void EnableA20(void)
 {
 #ifdef PC98
     outp(0xf2,0);
+#elif defined(USE_BIOS_FOR_A20) /* PC/AT BIOS */
+    union REGS reg;
+    reg.x.ax = 0x2401;
+    int86(0x15, &reg, &reg);
 #else /* PC/AT */
     while(inp(0x64)&2);
     outp(0x64,0xd1);
@@ -31,4 +35,3 @@ void EnableA20(void)
     while(inp(0x64)&2);
 #endif
 }
-
