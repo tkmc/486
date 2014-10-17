@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 #include <dos.h>
-#ifdef __MSC__
+#if defined(__MSC__) || defined(__WATCOMC__)
 #include <malloc.h>
 #else
 #include <alloc.h>
