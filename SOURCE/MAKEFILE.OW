@@ -74,7 +74,7 @@ sieve32.exe:	sieve32.obj a20.obj proto_a.obj seg.obj segtolin.obj &
 testgate.exe:	testgate.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj &
 		intfunc.obj proto_a.obj seg.obj  segtolin.obj task.obj &
 		task_a.obj
-	wlink system dos name $@ @<<
+	wlink option quiet system dos name $@ @<<
 file { $< }
 <<
 
@@ -89,14 +89,14 @@ fault.exe:	fault.obj disp.obj disp_a.obj gate.obj gpe_a.obj int.obj &
 testtask.exe:	testtask.obj disp.obj disp_a.obj gate.obj int.obj int_a.obj &
 		intfunc.obj proto_a.obj seg.obj segtolin.obj task.obj &
 		task_a.obj
-	wlink system dos name $@ @<<
+	wlink option quiet system dos name $@ @<<
 file { $< }
 <<
 
 vsieve.exe:	vsieve.obj a20.obj disp.obj disp_a.obj file.obj gate.obj &
 		int.obj int_a.obj intfunc.obj page.obj page_a.obj proto_a.obj &
 		seg.obj segtolin.obj sieve_a.obj trans_a.obj vm.obj
-	wlink system dos name $@ @<<
+	wlink option quiet system dos name $@ @<<
 file { $< }
 <<
 
@@ -104,7 +104,7 @@ intmon.exe:	intmon.obj a20.obj disp.obj disp_a.obj gate.obj int.obj &
 		int_a.obj intfunc.obj pmem.obj proto_a.obj seg.obj &
 		segtolin.obj task.obj task_a.obj trans_a.obj v86.obj &
 		v86_a.obj
-	wlink system dos name $@ @<<
+	wlink option quiet system dos name $@ @<<
 file { $< }
 <<
 
@@ -117,7 +117,7 @@ dpmisiev.exe:	dpmisiev.obj dpmi.obj dpmi_a.obj sieve_a.obj segtolin.obj
 revfile.exe:	revfile.obj a20.obj disp.obj disp_a.obj file.obj gate.obj &
 		int.obj int_a.obj intfunc.obj page.obj page_a.obj &
 		proto_a.obj rev_a.obj seg.obj segtolin.obj trans_a.obj vm.obj
-	wlink system dos name $@ @<<
+	wlink option quiet system dos name $@ @<<
 file { $< }
 <<
 
@@ -125,6 +125,6 @@ iomon.exe:	iomon.obj a20.obj disp.obj disp_a.obj gate.obj int.obj &
 		int_a.obj intfunc.obj ioaudit.obj ioemu_a.obj pmem.obj &
 		proto_a.obj seg.obj segtolin.obj task.obj task_a.obj &
 		trans_a.obj v86.obj v86_a.obj
-	wlink system dos name $@ @<<
+	wlink option quiet system dos name $@ @<<
 file { $< }
 <<
