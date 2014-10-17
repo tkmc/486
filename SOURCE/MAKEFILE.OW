@@ -28,6 +28,8 @@ TARGET	+= iomon.exe
 
 CC	= wcc
 CFLAGS	= -q -ecc -D__MSC__
+#CFLAGS	= -q -ecc -D__MSC__ -DDEBUG
+#CFLAGS	= -q -ecc -D__MSC__ -DUSE_BIOS_FOR_A20
 ASM	= wasm
 AFLAGS	= -q
 LD	= wcl
