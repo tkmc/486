@@ -17,11 +17,10 @@
 #include <dos.h>
 #ifdef __MSC__
 #include <malloc.h>
+#elif defined(__WATCOMC__)
+#include <stdlib.h>
 #else  /* BC */
 #include <alloc.h>
-#endif
-#ifdef __WATCOMC__
-#include <stdlib.h>
 #endif
 #include <memory.h>
 #include "proto.h"
@@ -68,4 +67,3 @@ void RealToV86(void)
     ltr(ProtoTssSel);
     SwitchTask(V86TssSel);
 }
-
