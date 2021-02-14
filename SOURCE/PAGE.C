@@ -66,9 +66,9 @@ void SetUpPTE(void)
     }
 
     segread(&seg);
-    p = SegToLinier(seg.ds, (unsigned short)ptr);
+    p = SegToLinear(seg.ds, (unsigned short)ptr);
     p = (p+0xfff)&0xfffff000;
-    ptr = (unsigned char *)(p-SegToLinier(seg.ds,0));
+    ptr = (unsigned char *)(p-SegToLinear(seg.ds,0));
 
     PageDir = (unsigned long *)ptr;
     ptr+=PAGESIZE;
@@ -76,13 +76,13 @@ void SetUpPTE(void)
         PageTbl[i] = (unsigned long *)ptr;
 
     for (i=0;i<MAXDIRNUM;i++)
-        PageDir[i] = MakePTE(SegToLinier(seg.ds,
+        PageDir[i] = MakePTE(SegToLinear(seg.ds,
                     (unsigned short)PageTbl[i]));
 
     for (p=0;p<(long)MAXDIRNUM*PAGENUM*PAGESIZE;p+=PAGESIZE)
         SetPTE(p,p);
 
-    lcr3(SegToLinier(seg.ds,(unsigned short)PageDir));
+    lcr3(SegToLinear(seg.ds,(unsigned short)PageDir));
 }
 
 /*

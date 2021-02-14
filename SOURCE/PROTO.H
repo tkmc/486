@@ -80,7 +80,7 @@ void SetSegDesc(
   unsigned char segtype,
   unsigned char seg32type,
   unsigned char dpl);
-unsigned long SegToLinier(unsigned short seg,
+unsigned long SegToLinear(unsigned short seg,
                                            unsigned short off);
 void          SetUpGDT(void);
 void          InitDisp(void);

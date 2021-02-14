@@ -31,7 +31,7 @@ void InitPmemBuf(void)
 void SetPmemBufSize(unsigned long m)
 {
     MemTransfer(0x100000L,
-        SegToLinier(seg.ds, (unsigned short)&m),
+        SegToLinear(seg.ds, (unsigned short)&m),
         (unsigned long) sizeof(m));
 }
 
@@ -39,7 +39,7 @@ unsigned long GetPmemBufSize()
 {
     unsigned long m;
 
-    MemTransfer(SegToLinier(seg.ds, (unsigned short)&m),
+    MemTransfer(SegToLinear(seg.ds, (unsigned short)&m),
         0x100000L, (unsigned long) sizeof(m));
     return m;
 }
@@ -50,7 +50,7 @@ void PutPmemBuf(char *buf, unsigned long m)
 
     s = GetPmemBufSize();
     MemTransfer(0x100000L+sizeof(s)+s,
-        SegToLinier(seg.ds, (unsigned short)buf), m);
+        SegToLinear(seg.ds, (unsigned short)buf), m);
     SetPmemBufSize(s+m);
 }
 
@@ -60,7 +60,7 @@ unsigned long GetPmemBuf(char *buf, unsigned long s, unsigned long m)
 
     mm = min(GetPmemBufSize()-s, m);
     if (mm>0)
-        MemTransfer( SegToLinier(seg.ds, (unsigned short)buf),
+        MemTransfer( SegToLinear(seg.ds, (unsigned short)buf),
             0x100000L+sizeof(s)+s, mm);
     return mm;
 }

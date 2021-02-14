@@ -41,7 +41,7 @@ void main(int argc, char *argv[])
     EnableA20();
 
     sel = AllocSel();
-    SetSegDesc(sel, SegToLinier(csseg32, 0),
+    SetSegDesc(sel, SegToLinear(csseg32, 0),
                                 0xffff, TypeCode, Code386, 0);
     sieveFunc = (void (__far *)() )
           (((unsigned long)sel<<16) + (unsigned short) sieve);

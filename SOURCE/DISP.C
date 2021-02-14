@@ -23,7 +23,7 @@ unsigned int VramSel;
 void InitDisp(void)
 {
     VramSel = AllocSel();
-    SetSegDesc(VramSel, SegToLinier(VRAMSEG,0), 0x2000,
+    SetSegDesc(VramSel, SegToLinear(VRAMSEG,0), 0x2000,
             TypeData, SmallSeg, 3);
 #ifdef PC98
     ScreenWidth = 80;

@@ -97,15 +97,15 @@ void SetUpGDT(void)
     datasize=0xffff;
     stacksize=0; /*(unsigned short) sbrk(0);*/
 
-    SetSegDesc(0x08, SegToLinier(seg.cs, 0),
+    SetSegDesc(0x08, SegToLinear(seg.cs, 0),
                              codesize, TypeCode, SmallSeg, 0);
-    SetSegDesc(0x10, SegToLinier(seg.ds, 0),
+    SetSegDesc(0x10, SegToLinear(seg.ds, 0),
                              datasize, TypeData, SmallSeg, 0);
-    SetSegDesc(0x18, SegToLinier(seg.ss, 0),
+    SetSegDesc(0x18, SegToLinear(seg.ss, 0),
                            stacksize, TypeStack, SmallSeg, 0);
-    SetSegDesc(0x20, SegToLinier(seg.cs, 0),
+    SetSegDesc(0x20, SegToLinear(seg.cs, 0),
                                0xffff, TypeCode, SmallSeg, 0);
-    SetSegDesc(0x28, SegToLinier(seg.ds, 0),
+    SetSegDesc(0x28, SegToLinear(seg.ds, 0),
                                0xffff, TypeData, SmallSeg, 0);
     SetSegDesc(0x30, 0L, 0xfffff, TypeData, BigSeg, 3);
 
@@ -115,7 +115,7 @@ void SetUpGDT(void)
  */
 
     gdtptr.limit = GDTNUM*sizeof(SegDesc) -1;
-    gdtptr.base  = SegToLinier(seg.ds, (unsigned short) gdt);
+    gdtptr.base  = SegToLinear(seg.ds, (unsigned short) gdt);
 
     lgdt(&gdtptr);
 }

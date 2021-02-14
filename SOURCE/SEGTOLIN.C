@@ -9,14 +9,14 @@
  */
 
 /*
- *    List 5-10  リニアアドレスを計算するSegToLinier()関数
+ *    List 5-10  リニアアドレスを計算するSegToLinear()関数
  *               [segtolin.c  1/1] (page 153)
  */
 
 #include <dos.h>
 #include "proto.h"
 
-unsigned long SegToLinier(unsigned short seg,
+unsigned long SegToLinear(unsigned short seg,
                                           unsigned short off)
 {
     return ((unsigned long)seg<<4) + off;

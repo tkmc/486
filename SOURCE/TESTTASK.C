@@ -124,13 +124,13 @@ void SetUpTSS(void)
                   stack[1] +STACKSIZE, 0x10, NULL, 0);
 
     SetSegDesc(TaskList[0],
-           SegToLinier(seg.ds, (unsigned short) tss),
+           SegToLinear(seg.ds, (unsigned short) tss),
                (long) sizeof(TSS), TypeTSS, SmallSeg, 0);
     SetSegDesc(TaskList[1],
-           SegToLinier(seg.ds, (unsigned short) (tss+1)),
+           SegToLinear(seg.ds, (unsigned short) (tss+1)),
                (long) sizeof(TSS), TypeTSS, SmallSeg, 0);
     SetSegDesc(TaskList[2],
-           SegToLinier(seg.ds, (unsigned short) (tss+2)),
+           SegToLinear(seg.ds, (unsigned short) (tss+2)),
                (long) sizeof(TSS), TypeTSS, SmallSeg, 0);
 }
 

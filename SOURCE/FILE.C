@@ -34,7 +34,7 @@ int ReadFile(int fd, unsigned long buf, int count)
     RealToProto_P(0);
 
     MemTransfer(buf,
-       SegToLinier(seg.ds, (unsigned short) dosbuf), (long) r);
+       SegToLinear(seg.ds, (unsigned short) dosbuf), (long) r);
     return r;
 }
 
@@ -42,7 +42,7 @@ int WriteFile(int fd, unsigned long buf, int count)
 {
     int r;
 
-    MemTransfer(SegToLinier(seg.ds, (unsigned short) dosbuf),
+    MemTransfer(SegToLinear(seg.ds, (unsigned short) dosbuf),
                                             buf, (long) count);
 
     ProtoToReal_P();
