@@ -42,10 +42,10 @@ void MakeSegDesc(
   unsigned char seg32type,
   unsigned char dpl)
 {
-    desc->baseL = (unsigned int) (addr & 0xffff);
+    desc->baseL = (unsigned short) (addr & 0xffff);
     desc->baseM = (unsigned char) ((addr >> 16) & 0xff);
     desc->baseH = (unsigned char) ((addr >> 24) & 0xff);
-    desc->limitL = (unsigned int) (limit & 0xffff);
+    desc->limitL = (unsigned short) (limit & 0xffff);
     desc->limitH = (unsigned char) ((limit >> 16) & 0x0f)
                                                   + seg32type;
 
