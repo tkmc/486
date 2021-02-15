@@ -56,7 +56,7 @@ void main(int argc, char *argv[])
     EnableA20();
 
     sel = AllocSel();
-    SetSegDesc(sel, SegToLinier(csseg32, 0),
+    SetSegDesc(sel, SegToLinear(csseg32, 0),
                                 0xffff, TypeCode, Code386, 0);
     sieveFunc = (void (__far *)() )
         (((unsigned long)sel<<16) + (unsigned short) sieve);
@@ -70,7 +70,7 @@ void main(int argc, char *argv[])
         fprintf(stderr, "Can't alloc memory\n");
         exit(1);
     }
-    ptop = SegToLinier(seg.ds, (unsigned short)ptop+PAGESIZE) & 0xfffff000;
+    ptop = SegToLinear(seg.ds, (unsigned short)ptop+PAGESIZE) & 0xfffff000;
     VMInit(ptop, PHYSSIZE, TBLADR, TBLSIZE);
     VMMapFile(swapfile);
 

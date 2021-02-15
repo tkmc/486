@@ -29,7 +29,7 @@ void main(void)
     SetUpIDT(0);
 
     sel = AllocSel();
-    SetSegDesc(sel, SegToLinier(seg.ds, 0), 0x03ff,
+    SetSegDesc(sel, SegToLinear(seg.ds, 0), 0x03ff,
                                        TypeData, SmallSeg, 0);
 
     RealToProto_I(1);

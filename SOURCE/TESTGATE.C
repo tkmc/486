@@ -45,23 +45,23 @@ void main(void)
     InitDisp();
 
     selcseg = AllocSel();
-    SetSegDesc(selcseg, SegToLinier(seg.cs, 0), 0xffff,
+    SetSegDesc(selcseg, SegToLinear(seg.cs, 0), 0xffff,
         TypeCode, SmallSeg, 3);
     seldseg = AllocSel();
-    SetSegDesc(seldseg, SegToLinier(seg.ds, 0), 0xffff,
+    SetSegDesc(seldseg, SegToLinear(seg.ds, 0), 0xffff,
         TypeData, SmallSeg, 3);
     selsseg = AllocSel();
-    SetSegDesc(selsseg, SegToLinier(seg.ss, 0), 0,
+    SetSegDesc(selsseg, SegToLinear(seg.ss, 0), 0,
         TypeStack, SmallSeg, 3);
 
     seltss_os = AllocSel();
     SetSegDesc(seltss_os,
-               SegToLinier(seg.ds, (unsigned short) &tss_os),
+               SegToLinear(seg.ds, (unsigned short) &tss_os),
                      (long) sizeof(TSS), TypeTSS, SmallSeg, 0);
 
     seltss_app = AllocSel();
     SetSegDesc(seltss_app,
-               SegToLinier(seg.ds, (unsigned short) &tss_app),
+               SegToLinear(seg.ds, (unsigned short) &tss_app),
                      (long) sizeof(TSS), TypeTSS, SmallSeg, 3);
     SetTSS( &tss_app, selcseg|3, seldseg,
                   AppMain, 0, stack_app+STACKSIZE,

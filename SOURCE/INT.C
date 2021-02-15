@@ -49,7 +49,7 @@ void SetUpIDT(unsigned char dpl)
     SetIDTGateDesc(0x0d, 0x08, GPEFault, 0, TypeTrapGate, dpl);
 
     idtptr.limit = IDTNUM*sizeof(GateDesc);
-    idtptr.base  = SegToLinier(seg.ds, (unsigned short) idt);
+    idtptr.base  = SegToLinear(seg.ds, (unsigned short) idt);
     ridtptr.limit = 0x3ff;
     ridtptr.base  = 0;
 

@@ -51,11 +51,11 @@ void SetV86(void (*f)())
 
     ProtoTssSel = AllocSel();
     SetSegDesc(ProtoTssSel,
-        SegToLinier(seg.ds, (unsigned short) &tss),
+        SegToLinear(seg.ds, (unsigned short) &tss),
             (long) sizeof(TSS), TypeTSS, SmallSeg, 0);
     V86TssSel = AllocSel();
     SetSegDesc(V86TssSel,
-        SegToLinier(seg.ds, (unsigned short) &v86tss),
+        SegToLinear(seg.ds, (unsigned short) &v86tss),
             (long) sizeof(TSS_IO), TypeTSS, SmallSeg, 0);
 
     IntHandler = v86int;
