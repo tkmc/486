@@ -41,6 +41,12 @@
 * [MASM 8.0](http://www.microsoft.com/ja-jp/download/details.aspx?id=12654)
 * [OpenWatcom](http://www.openwatcom.org/index.php/Main_Page)
 
+## macOSでの環境構築
+
+macOSでサンプルプログラムを実行して試すには下記が参考になります。
+
+* [macOS で『はじめて読む486』の環境構築](https://qiita.com/zulinx86/items/b5f6f9c27c601dd3fee2)
+
 
 # ソースコードの修正
 
