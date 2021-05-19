@@ -26,7 +26,7 @@
  サンプルプログラムはC言語のプログラムからアセンブラのプログラムを呼び出す形で記述されています。このためリアルモードで実行できる16ビット対応のCコンパイラが必要です。
  MicrosoftのVisualC++の入手可能な版では16ビットをサポートしていませんので、他のコンパイラが必要です。現在入手可能なものでは、例えば下記のコンパイラがあるようです。
 
-* [OpenWatcom](http://www.openwatcom.org/index.php/Main_Page)
+* [OpenWatcom](http://www.openwatcom.org/)
 * [LSI C-86試食版](http://www.lsi-j.co.jp/freesoft/)
 
  LSI C-86はC言語からアセンブリ言語への呼び出し規約がMS-C等と異なるため、アセンブリ・プログラム側の修正が多く必要になります。
@@ -39,7 +39,7 @@
 サンプルプログラムをアセンブルするには、MASM、もしくは互換のアセンブラが必要です。MASMは下記で入手できるようです。上記Cコンパイラの項で紹介したOpen Watcom C にはアセンブラも付属しています。
 
 * [MASM 8.0](http://www.microsoft.com/ja-jp/download/details.aspx?id=12654)
-* [OpenWatcom](http://www.openwatcom.org/index.php/Main_Page)
+* [OpenWatcom](http://www.openwatcom.org/)
 
 ## macOSでの環境構築
 
@@ -56,7 +56,7 @@ macOSでサンプルプログラムを実行して試すには下記が参考に
  本サイトでは本書のサンプルプログラムを現在の環境で動作可能とする修正を加えて公開します。このため、本書のサンプルプログラムとして掲載されているソースコードとは異なる部分があります。サンプルプログラムを実際に動作させて確認する場合には最新版のソースコードをご利用ください。今後修正があれば本サイトのソースコードに修正内容を反映させて紹介していきます。
  現時点では下記の開発環境を前提としてソースコードを提供しています。
 
-* [OpenWatcom](http://www.openwatcom.org/index.php/Main_Page)
+* [OpenWatcom](http://www.openwatcom.org/)
 
 # ライセンス
 
