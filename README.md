@@ -38,7 +38,8 @@
 
 サンプルプログラムをアセンブルするには、MASM、もしくは互換のアセンブラが必要です。MASMは下記で入手できるようです。上記Cコンパイラの項で紹介したOpen Watcom C にはアセンブラも付属しています。
 
-* [MASM 8.0](http://www.microsoft.com/ja-jp/download/details.aspx?id=12654)
+* ~~[MASM 8.0](http://www.microsoft.com/ja-jp/download/details.aspx?id=12654)~~
+* [microsoft/MS-DOS](https://github.com/microsoft/MS-DOS)
 * [OpenWatcom](http://www.openwatcom.org/)
 
 ## macOSでの環境構築
